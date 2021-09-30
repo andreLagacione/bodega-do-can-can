@@ -1,0 +1,319 @@
+{
+	"version": 1,
+	"projects": {
+		"bodega": {
+			"projectType": "application",
+			"root": "apps/bodega",
+			"sourceRoot": "apps/bodega/src",
+			"prefix": "bodega",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/angular:webpack-browser",
+					"outputs": [
+						"{options.outputPath}"
+					],
+					"options": {
+						"outputPath": "dist/apps/bodega",
+						"index": "apps/bodega/src/index.html",
+						"main": "apps/bodega/src/main.ts",
+						"polyfills": "apps/bodega/src/polyfills.ts",
+						"tsConfig": "apps/bodega/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"apps/bodega/src/favicon.ico",
+							"apps/bodega/src/assets"
+						],
+						"styles": [
+							"apps/bodega/src/styles.scss"
+						],
+						"scripts": [],
+						"customWebpackConfig": {
+							"path": "apps/bodega/webpack.config.js"
+						},
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"fileReplacements": [
+								{
+									"replace": "apps/bodega/src/environments/environment.ts",
+									"with": "apps/bodega/src/environments/environment.prod.ts"
+								}
+							],
+							"outputHashing": "all",
+							"customWebpackConfig": {
+								"path": "apps/bodega/webpack.prod.config.js"
+							}
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@nrwl/angular:webpack-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "bodega:build:production"
+						},
+						"development": {
+							"browserTarget": "bodega:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4200
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "bodega:build",
+						"extraWebpackConfig": "apps/bodega/webpack.config.js"
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": [
+							"apps/bodega/src/**/*.ts",
+							"apps/bodega/src/**/*.html"
+						]
+					}
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": [
+						"coverage/apps/bodega"
+					],
+					"options": {
+						"jestConfig": "apps/bodega/jest.config.js",
+						"passWithNoTests": true
+					}
+				}
+			}
+		},
+		"bodega-e2e": {
+			"root": "apps/bodega-e2e",
+			"sourceRoot": "apps/bodega-e2e/src",
+			"projectType": "application",
+			"architect": {
+				"e2e": {
+					"builder": "@nrwl/cypress:cypress",
+					"options": {
+						"cypressConfig": "apps/bodega-e2e/cypress.json",
+						"devServerTarget": "bodega:serve:development",
+						"tsConfig": "apps/bodega-e2e/tsconfig.json"
+					},
+					"configurations": {
+						"production": {
+							"devServerTarget": "bodega:serve:production"
+						}
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"outputs": [
+						"{options.outputFile}"
+					],
+					"options": {
+						"lintFilePatterns": [
+							"apps/bodega-e2e/**/*.{js,ts}"
+						]
+					}
+				}
+			}
+		},
+		"main": {
+			"projectType": "application",
+			"root": "apps/main",
+			"sourceRoot": "apps/main/src",
+			"prefix": "bodega",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/angular:webpack-browser",
+					"outputs": [
+						"{options.outputPath}"
+					],
+					"options": {
+						"outputPath": "dist/apps/main",
+						"index": "apps/main/src/index.html",
+						"main": "apps/main/src/main.ts",
+						"polyfills": "apps/main/src/polyfills.ts",
+						"tsConfig": "apps/main/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"apps/main/src/favicon.ico",
+							"apps/main/src/assets"
+						],
+						"styles": [
+							"apps/main/src/styles.scss"
+						],
+						"scripts": [],
+						"customWebpackConfig": {
+							"path": "apps/main/webpack.config.js"
+						},
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"fileReplacements": [
+								{
+									"replace": "apps/main/src/environments/environment.ts",
+									"with": "apps/main/src/environments/environment.prod.ts"
+								}
+							],
+							"outputHashing": "all",
+							"customWebpackConfig": {
+								"path": "apps/main/webpack.prod.config.js"
+							}
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@nrwl/angular:webpack-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "main:build:production"
+						},
+						"development": {
+							"browserTarget": "main:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4201
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "main:build",
+						"extraWebpackConfig": "apps/main/webpack.config.js"
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": [
+							"apps/main/src/**/*.ts",
+							"apps/main/src/**/*.html"
+						]
+					}
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": [
+						"coverage/apps/main"
+					],
+					"options": {
+						"jestConfig": "apps/main/jest.config.js",
+						"passWithNoTests": true
+					}
+				}
+			}
+		},
+		"main-e2e": {
+			"root": "apps/main-e2e",
+			"sourceRoot": "apps/main-e2e/src",
+			"projectType": "application",
+			"architect": {
+				"e2e": {
+					"builder": "@nrwl/cypress:cypress",
+					"options": {
+						"cypressConfig": "apps/main-e2e/cypress.json",
+						"devServerTarget": "main:serve:development"
+					},
+					"configurations": {
+						"production": {
+							"devServerTarget": "main:serve:production"
+						}
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"outputs": [
+						"{options.outputFile}"
+					],
+					"options": {
+						"lintFilePatterns": [
+							"apps/main-e2e/**/*.{js,ts}"
+						]
+					}
+				}
+			}
+		}
+	},
+	"cli": {
+		"analytics": "5181a4f3-5098-4c7e-b773-c203cba3b4ed",
+		"defaultCollection": "@nrwl/angular",
+		"packageManager": "npm"
+	},
+	"schematics": {
+		"@nrwl/angular": {
+			"application": {
+				"linter": "eslint"
+			},
+			"library": {
+				"linter": "eslint"
+			},
+			"storybook-configuration": {
+				"linter": "eslint"
+			}
+		},
+		"@nrwl/angular:application": {
+			"style": "scss",
+			"linter": "eslint",
+			"unitTestRunner": "jest",
+			"e2eTestRunner": "cypress"
+		},
+		"@nrwl/angular:library": {
+			"style": "scss",
+			"linter": "eslint",
+			"unitTestRunner": "jest"
+		},
+		"@nrwl/angular:component": {
+			"style": "scss"
+		}
+	},
+	"defaultProject": "bodega"
+}
